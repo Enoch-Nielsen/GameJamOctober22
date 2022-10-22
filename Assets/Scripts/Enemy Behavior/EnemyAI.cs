@@ -8,6 +8,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private NavMeshAgent agent = null;
     [SerializeField] private GameObject[] wayPoints = null;
     [SerializeField] private float speed = 5;
+    public bool canSeePlayer = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,5 +29,15 @@ public class EnemyAI : MonoBehaviour
     public GameObject[] GetWayPoints()
     {
         return wayPoints;
+    }
+
+    public void SeesPlayer()
+    {
+        canSeePlayer = true;
+    }
+
+    public bool CanSeePlayer()
+    {
+        return canSeePlayer;
     }
 }
