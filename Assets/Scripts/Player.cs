@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     [SerializeField] private CameraController cameraController;
     
     [SerializeField] private GameObject monsterParent;
-    [SerializeField] private GameObject currentPlayer;
+    public GameObject currentPlayer;
     [SerializeField] private GameObject currentSelectedMonster;
 
     [SerializeField] private List<GameObject> viableMonsters;
@@ -110,7 +110,6 @@ public class Player : MonoBehaviour
                     currentSelectedMonster.transform.localPosition) <= maxDistance)
             {
                 monster.GetComponent<SpriteRenderer>().color = Color.yellow;
-                Debug.Log("TestLog");
             }
             else
             {
@@ -210,6 +209,7 @@ public class Player : MonoBehaviour
     {
         // Get Stats.
         maxDeathTimer = currentPlayer.GetComponent<MonsterStats>().monsterDeathTime;
+        currentDeathTimer = maxDeathTimer;
         currentVignette = currentPlayer.GetComponent<MonsterStats>().nightVision;
     }
 
@@ -227,5 +227,12 @@ public class Player : MonoBehaviour
         }
 
         lightParent.transform.position = currentPlayer.transform.position;
+    }
+
+    public void Damage(float damage)
+    {
+        currentDeathTimer -= damage;
+        currentDeathTimer = Mathf.Clamp(currentDeathTimer, 0, maxDeathTimer);
+        Debug.Log("OW : " + damage);
     }
 }
