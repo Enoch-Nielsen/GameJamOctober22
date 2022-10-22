@@ -11,12 +11,21 @@ public class FSMPatrol : BaseFSM
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
         wayPointNumber = Random.Range(0, 3);
-        agent.SetDestination(wayPoints[wayPointNumber].transform.position);
+        
+        if (agent.enabled)
+        {
+            agent.SetDestination(wayPoints[wayPointNumber].transform.position);
+        }
     }
 
     // OnStateUpdate is called before OnStateUpdate is called on any state inside this state machine
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        if (agent.enabled == false)
+        {
+            return;
+        }
+        
         if (agent.remainingDistance != 0)
         {
             return;
