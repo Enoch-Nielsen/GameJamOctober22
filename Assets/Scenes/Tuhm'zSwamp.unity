@@ -329,6 +329,7 @@ GameObject:
   - component: {fileID: 191782931}
   - component: {fileID: 191782932}
   - component: {fileID: 191782933}
+  - component: {fileID: 191782934}
   m_Layer: 0
   m_Name: FieldOfView
   m_TagString: Untagged
@@ -345,7 +346,7 @@ Transform:
   m_GameObject: {fileID: 191782930}
   m_LocalRotation: {x: 0.048588313, y: -0, z: 0.99881893, w: 0}
   m_LocalPosition: {x: 0, y: 3, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 8.7, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1221258997}
@@ -431,6 +432,19 @@ PolygonCollider2D:
     - - {x: 0, y: 0.5773587}
       - {x: -0.5, y: -0.28866667}
       - {x: 0.5, y: -0.28866667}
+--- !u!114 &191782934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191782930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07fb57e80358c644b801521e429dc117, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentObject: {fileID: 1003582863}
 --- !u!1 &207595440
 GameObject:
   m_ObjectHideFlags: 0
@@ -752,7 +766,6 @@ GameObject:
   - component: {fileID: 989744732}
   - component: {fileID: 989744731}
   - component: {fileID: 989744733}
-  - component: {fileID: 989744734}
   m_Layer: 0
   m_Name: VisualBadGuy
   m_TagString: Untagged
@@ -834,7 +847,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 989744730}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -843,19 +856,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2
---- !u!114 &989744734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 989744730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07fb57e80358c644b801521e429dc117, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentObject: {fileID: 1003582863}
 --- !u!1 &1003582861
 GameObject:
   m_ObjectHideFlags: 0
@@ -869,7 +869,6 @@ GameObject:
   - component: {fileID: 1003582864}
   - component: {fileID: 1003582863}
   - component: {fileID: 1003582862}
-  - component: {fileID: 1003582867}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -920,7 +919,9 @@ MonoBehaviour:
   - {fileID: 1883288985}
   speed: 5
   focalPoint: {fileID: 1221258996}
-  enemyRB: {fileID: 1003582867}
+  initialTransform: {fileID: 1003582866}
+  oldPosition: {x: 0, y: 0, z: 0}
+  newPosition: {x: 0, y: 0, z: 0}
 --- !u!95 &1003582864
 Animator:
   serializedVersion: 4
@@ -1010,27 +1011,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &1003582867
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1003582861}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0.00001
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &1060983016
 GameObject:
   m_ObjectHideFlags: 0
@@ -1428,7 +1408,9 @@ MonoBehaviour:
   - {fileID: 0}
   speed: 5
   focalPoint: {fileID: 0}
-  enemyRB: {fileID: 0}
+  initialTransform: {fileID: 0}
+  oldPosition: {x: 0, y: 0, z: 0}
+  newPosition: {x: 0, y: 0, z: 0}
 --- !u!65 &1483573877
 BoxCollider:
   m_ObjectHideFlags: 0
