@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Monster
   - MonsterParent
+  - PlayerMain
   layers:
   - Default
   - TransparentFX
