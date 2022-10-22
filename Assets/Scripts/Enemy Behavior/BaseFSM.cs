@@ -5,14 +5,18 @@ using UnityEngine.AI;
 
 public class BaseFSM : StateMachineBehaviour
 {
-    public EnemyAI badGuy = null;
-    public NavMeshAgent agent = null;
-    public GameObject[] wayPoints = null;
+    public GameObject badGuy;
+    public EnemyAI badGuyAI;
+    public NavMeshAgent agent;
+    public GameObject[] wayPoints;
 
     // OnStateEnter is called before OnStateEnter is called on any state inside this state machine
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        badGuy = animator.gameObject;
+        badGuyAI = badGuy.GetComponent<EnemyAI>();
+        agent = badGuyAI.GetNavMeshAgent();
+        wayPoints = badGuyAI.GetWayPoints();
     }
 
     // OnStateUpdate is called before OnStateUpdate is called on any state inside this state machine
