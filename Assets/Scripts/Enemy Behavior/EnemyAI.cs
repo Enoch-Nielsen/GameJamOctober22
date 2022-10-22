@@ -13,8 +13,8 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private Transform initialTransform;
 
     private GameObject playerInView = null;
-    [SerializeField] Vector3 oldPosition;
-    [SerializeField] Vector3 newPosition;
+    [SerializeField] Vector2 oldPosition;
+    [SerializeField] Vector2 newPosition;
     // Start is called before the first frame update
     void Start()
     {
