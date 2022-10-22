@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI timerTextTemp;
     [SerializeField] private CameraController cameraController;
     
     [SerializeField] private GameObject monsterParent;
@@ -15,16 +18,22 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float maxDistance;
 
+    [SerializeField] private float maxDeathTimer;
+    [SerializeField] private float currentDeathTimer;
+
     private void Start()
     {
         monsterParent = GameObject.FindWithTag("MonsterParent");
         currentPlayer.GetComponent<PlayerMove>().enabled = true;
+        currentDeathTimer = maxDeathTimer;
     }
 
     private void Update()
     {
+        if (currentPlayer == null)
+            return;
+
         // Fill monster list.
-        
         foreach (Transform monster in monsterParent.transform)
         {
             if (viableMonsters.Contains(monster.gameObject))
@@ -90,6 +99,15 @@ public class Player : MonoBehaviour
             }
         }
         
+        // Update Death Timer.
+        if (currentDeathTimer >= 0)
+        {
+            currentDeathTimer -= Time.deltaTime;
+        }
+        
+        // Death Timer Text.
+        timerTextTemp.text = "" + Mathf.RoundToInt(currentDeathTimer);
+
         // Update camera target.
 
         cameraController.target = currentPlayer.transform;
@@ -104,14 +122,37 @@ public class Player : MonoBehaviour
                 
                 currentPlayer.GetComponent<PlayerMove>().enabled = false;
                 currentPlayer.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                
+                // Kill the current monster.
+                KillMonster(currentPlayer, false);
+                
                 currentPlayer = currentSelectedMonster;
                 
                 currentPlayer.GetComponent<SpriteRenderer>().color = Color.white;
                 currentSelectedMonster.GetComponent<SpriteRenderer>().color = Color.white;
-
-
+                
                 currentSelectedMonster = null;
+
+                currentDeathTimer = maxDeathTimer;
             }
         }
+        
+        // Kill the player if they go overtime.
+        if (currentDeathTimer <= 0)
+        {
+            KillMonster(currentPlayer, true);
+            Debug.Log("Dead");
+        }
+    }
+
+    private void KillMonster(GameObject monster, bool player)
+    {
+        // This is just a placeholder.
+
+        if (player)
+            currentPlayer = null;
+
+        viableMonsters.Remove(monster);
+        Destroy(monster); 
     }
 }
