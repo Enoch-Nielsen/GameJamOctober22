@@ -9,7 +9,7 @@ public class CameraController : MonoBehaviour
 
     [SerializeField] private float lerpSpeed;
     
-    private void LateUpdate()
+    private void Update()
     {
         if (target == null)
             return;

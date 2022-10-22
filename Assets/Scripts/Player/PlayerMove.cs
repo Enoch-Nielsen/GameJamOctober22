@@ -13,23 +13,20 @@ public class PlayerMove : MonoBehaviour
 
     public bool canMove;
     
-    void Update()
+    private void Update()
     {
+        if (!canMove)
+            return;
+        
         if (!canMove)
             return;        
         
         float xIn = Input.GetAxisRaw("Horizontal");
         float yIn = Input.GetAxisRaw("Vertical");
 
-        move = new Vector2(xIn, yIn).normalized;
+        move = new Vector2(xIn, yIn);
 
         monsterAnimator.velocity = move;
-    }
-
-    private void FixedUpdate()
-    {
-        if (!canMove)
-            return;
         
         rb.velocity = new Vector2(move.x * speed, move.y * speed);
     }

@@ -111,21 +111,6 @@ public class Player : MonoBehaviour
             currentSelectedMonster = viableMonsters[shortIndex];
         }
 
-        // Highlight Selected Monster.
-        
-        foreach (var monster in viableMonsters)
-        {
-            if (currentSelectedMonster != null && monster == currentSelectedMonster && Vector2.Distance(currentPlayer.transform.localPosition,
-                    currentSelectedMonster.transform.localPosition) <= maxDistance)
-            {
-                monster.GetComponent<SpriteRenderer>().color = Color.yellow;
-            }
-            else
-            {
-                monster.GetComponent<SpriteRenderer>().color = Color.white;
-            }
-        }
-
         // Update Death Timer.
         if (currentDeathTimer >= 0)
         {
@@ -207,11 +192,7 @@ public class Player : MonoBehaviour
             currentPlayer.tag = "Player";
 
             SetStats();
-
-            // Reset Color.
-            currentPlayer.GetComponent<SpriteRenderer>().color = Color.white;
-            currentSelectedMonster.GetComponent<SpriteRenderer>().color = Color.white;
-
+            
             currentSelectedMonster = null;
 
             currentDeathTimer = maxDeathTimer;
