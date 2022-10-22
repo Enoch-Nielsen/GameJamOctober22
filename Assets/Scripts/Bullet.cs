@@ -22,14 +22,14 @@ public class Bullet : MonoBehaviour
     private void Update()
     {
         if (playerPos == null)
-            DestroyImmediate(gameObject);
+            Destroy(gameObject);
         
         transform.position += (direction * (Time.deltaTime * speed));
 
         if (Vector2.Distance(playerPos.position, transform.position) <= playerMaxDist)
         {
             player.Damage(damage);
-            DestroyImmediate(gameObject);
+            Destroy(gameObject);
         }
     }
 }

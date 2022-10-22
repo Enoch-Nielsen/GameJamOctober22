@@ -9,7 +9,7 @@ public class BaseFSM : StateMachineBehaviour
     public EnemyAI badGuyAI;
     public NavMeshAgent agent;
     public GameObject[] wayPoints;
-    public bool playerIsInsight = false;
+    public GameObject playerInView;
 
     // OnStateEnter is called before OnStateEnter is called on any state inside this state machine
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -23,11 +23,7 @@ public class BaseFSM : StateMachineBehaviour
     // OnStateUpdate is called before OnStateUpdate is called on any state inside this state machine
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        badGuyAI.CanSeePlayer();
-        if (playerIsInsight)
-        {
-            
-        }
+        playerInView = badGuyAI.GetCurrentPlayerInView();
     }
 
     // OnStateExit is called before OnStateExit is called on any state inside this state machine

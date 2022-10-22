@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
         monsterParent = GameObject.FindWithTag("MonsterParent");
         currentPlayer.GetComponent<PlayerMove>().enabled = true;
         currentDeathTimer = maxDeathTimer;
+        currentPlayer.tag = "Player";
 
         if (postProcessing.profile.TryGet<Vignette>(out var tmpVignette))
         {
@@ -166,12 +167,14 @@ public class Player : MonoBehaviour
 
                     currentPlayer.GetComponent<PlayerMove>().enabled = false;
                     currentPlayer.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                    currentPlayer.transform.tag = "Monster";
 
                     // Kill the current monster.
                     KillMonster(currentPlayer, false);
 
                     // Set the player to the new monster.
                     currentPlayer = currentSelectedMonster;
+                    currentPlayer.tag = "Player";
 
                     SetStats();
 

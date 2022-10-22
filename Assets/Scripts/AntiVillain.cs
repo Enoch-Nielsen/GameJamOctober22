@@ -18,7 +18,7 @@ public class AntiVillain : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        player = GameObject.FindWithTag("PlayerMain").GetComponent<Player>();
     }
 
     private void Update()
@@ -51,10 +51,14 @@ public class AntiVillain : MonoBehaviour
         Vector2 direction = ((Vector2)playerTransform.position - ((Vector2)transform.position + randomAcc));
 
         Bullet b = Instantiate(bullet, transform.position, Quaternion.Euler(Vector3.zero)).GetComponent<Bullet>();
-        b.playerPos = playerTransform;
-        b.player = player;
-        b.direction = direction;
-        
+
+        if (b != null)
+        {
+            b.playerPos = playerTransform;
+            b.player = player;
+            b.direction = direction;
+        }
+
         shootTimer = 0;
         
         Debug.Log("Bang");
