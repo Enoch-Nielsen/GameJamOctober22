@@ -30,7 +30,7 @@ public class EnemyAI : MonoBehaviour
         newPosition = this.transform.position;
 
         float velocityY = newPosition.y - Mathf.Abs(oldPosition.y);
-        float velocityX = newPosition.x - oldPosition.x;
+        float velocityX = newPosition.x - Mathf.Abs(oldPosition.x);
         //Debug.Log(enemyRB.velocity.y.ToString());
         Vector3 viewRotation = focalPoint.transform.rotation.eulerAngles;
         if((velocityY > 0.00001 || velocityY < -0.1) && (velocityX > 0.00001 || velocityX < -0.00001))
