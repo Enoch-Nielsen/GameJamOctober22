@@ -4,9 +4,12 @@ using System.Security.Cryptography;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private Volume postProcessing;
     [SerializeField] private TextMeshProUGUI timerTextTemp;
     [SerializeField] private CameraController cameraController;
     
@@ -21,11 +24,21 @@ public class Player : MonoBehaviour
     [SerializeField] private float maxDeathTimer;
     [SerializeField] private float currentDeathTimer;
 
+    [SerializeField] private float currentVignette, vignetteLerpStandIn, vignetteLerpTime;
+    private Vignette _vignette;
+
     private void Start()
     {
         monsterParent = GameObject.FindWithTag("MonsterParent");
         currentPlayer.GetComponent<PlayerMove>().enabled = true;
         currentDeathTimer = maxDeathTimer;
+
+        if (postProcessing.profile.TryGet<Vignette>(out var tmpVignette))
+        {
+            _vignette = tmpVignette;
+        }
+        
+        SetStats();
     }
 
     private void Update()
@@ -107,6 +120,10 @@ public class Player : MonoBehaviour
         
         // Death Timer Text.
         timerTextTemp.text = "" + Mathf.RoundToInt(currentDeathTimer);
+        
+        // Update Vignette.
+        vignetteLerpStandIn = Mathf.Lerp(vignetteLerpStandIn, currentVignette, vignetteLerpTime * Time.deltaTime);
+        _vignette.intensity.value = vignetteLerpStandIn;
 
         // Update camera target.
 
@@ -126,10 +143,16 @@ public class Player : MonoBehaviour
                 // Kill the current monster.
                 KillMonster(currentPlayer, false);
                 
+                // Set the player to the new monster.
                 currentPlayer = currentSelectedMonster;
                 
+                SetStats();
+                
+                // Reset Color.
                 currentPlayer.GetComponent<SpriteRenderer>().color = Color.white;
                 currentSelectedMonster.GetComponent<SpriteRenderer>().color = Color.white;
+                
+
                 
                 currentSelectedMonster = null;
 
@@ -154,5 +177,12 @@ public class Player : MonoBehaviour
 
         viableMonsters.Remove(monster);
         Destroy(monster); 
+    }
+
+    private void SetStats()
+    {
+        // Get Stats.
+        maxDeathTimer = currentPlayer.GetComponent<MonsterStats>().monsterDeathTime;
+        currentVignette = currentPlayer.GetComponent<MonsterStats>().nightVision;
     }
 }
