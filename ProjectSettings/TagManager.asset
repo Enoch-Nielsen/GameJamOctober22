@@ -13,8 +13,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Monsters
+  - Path
   - 
   - 
   - 
@@ -42,4 +42,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: PlayerLayer
+    uniqueID: 2814104855
+    locked: 0
+  - name: PathLayer
+    uniqueID: 94798717
     locked: 0
