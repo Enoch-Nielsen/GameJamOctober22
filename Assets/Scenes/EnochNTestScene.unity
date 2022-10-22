@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1366025929}
-  lerpSpeed: 5
+  lerpSpeed: 3.5
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,6 +457,54 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4624385410125474567, guid: 9d01158e5b3b0004e873966c82425030, type: 3}
   m_PrefabInstance: {fileID: 1134174229}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &855635364
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 855635366}
+  - component: {fileID: 855635365}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &855635365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855635364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0ffbb2d5630165468b6c11159be8742, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioObject: {fileID: 8500868513193785016, guid: 2db772ffd14abdc4180a102d8ce67207, type: 3}
+  soundQueue: []
+  soundsPlaying: []
+  volume: 1
+--- !u!4 &855635366
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855635364}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1914314194}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1022861429 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4624385410125474567, guid: 9d01158e5b3b0004e873966c82425030, type: 3}
@@ -1334,7 +1382,7 @@ GameObject:
   - component: {fileID: 1914314195}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Player
+  m_TagString: PlayerMain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1356,6 +1404,7 @@ Transform:
   - {fileID: 1114197699}
   - {fileID: 1618131727}
   - {fileID: 1222104660}
+  - {fileID: 855635366}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1371,12 +1420,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c74e0751364b48b7cf4ef6162e8ff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManager: {fileID: 855635365}
+  death: {fileID: 8300000, guid: 962ef88fd50cd2b4abcf62c87ee382a4, type: 3}
+  possess: {fileID: 8300000, guid: 463174a0db7c28a4d84567a7485099ae, type: 3}
   lightParent: {fileID: 1618131727}
   light2D: {fileID: 1201957431}
-  baseLightPosition: {x: 0, y: -3}
-  currentLightPosition: {x: 0, y: -3}
+  lightMaxTimer: 1
+  lightLerpSpeed: 1
   postProcessing: {fileID: 1114197700}
-  timerTextTemp: {fileID: 1945411412}
+  currentVignette: 0
+  vignetteLerpStandIn: 0
+  vignetteLerpTime: 1
   cameraController: {fileID: 519420033}
   monsterParent: {fileID: 0}
   currentPlayer: {fileID: 1366025925}
@@ -1385,11 +1439,8 @@ MonoBehaviour:
   maxDistance: 10
   maxDeathTimer: 10
   currentDeathTimer: 0
-  currentVignette: 0
-  vignetteLerpStandIn: 0
-  vignetteLerpTime: 1
-  lightMaxTimer: 1
-  lightLerpSpeed: 1
+  soulObject: {fileID: 6666466563013280766, guid: 5ccab8d737ac11c4cbeae171db870106, type: 3}
+  timerTextTemp: {fileID: 1945411412}
 --- !u!1 &1945411410
 GameObject:
   m_ObjectHideFlags: 0
