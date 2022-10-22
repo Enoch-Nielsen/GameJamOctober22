@@ -9,6 +9,8 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float speed;
     [SerializeField] private Vector2 move;
+    [SerializeField] private MonsterAnimator monsterAnimator;
+
     public bool canMove;
     
     void Update()
@@ -20,6 +22,8 @@ public class PlayerMove : MonoBehaviour
         float yIn = Input.GetAxisRaw("Vertical");
 
         move = new Vector2(xIn, yIn).normalized;
+
+        monsterAnimator.velocity = move;
     }
 
     private void FixedUpdate()

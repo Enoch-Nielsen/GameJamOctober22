@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using Random = UnityEngine.Random;
@@ -44,7 +45,9 @@ public class Player : MonoBehaviour
         monsterParent = GameObject.FindWithTag("MonsterParent");
         currentPlayer.GetComponent<PlayerMove>().enabled = true;
         currentPlayer.GetComponent<PlayerMove>().canMove = true;
-
+        currentPlayer.GetComponent<EnemyAI>().enabled = false;
+        currentPlayer.GetComponent<NavMeshAgent>().enabled = false;
+        
         currentDeathTimer = maxDeathTimer;
         currentPlayer.tag = "Player";
 
@@ -182,8 +185,12 @@ public class Player : MonoBehaviour
                 currentSelectedMonster.transform.localPosition) <= maxDistance)
         {
             currentSelectedMonster.GetComponent<PlayerMove>().enabled = true;
+            currentSelectedMonster.GetComponent<EnemyAI>().enabled = false;
+            currentSelectedMonster.GetComponent<NavMeshAgent>().enabled = false;
 
             currentPlayer.GetComponent<PlayerMove>().enabled = false;
+            currentPlayer.GetComponent<EnemyAI>().enabled = false;
+            currentPlayer.GetComponent<NavMeshAgent>().enabled = false;
             currentPlayer.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             currentPlayer.transform.tag = "Monster";
             
