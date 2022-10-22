@@ -22,7 +22,10 @@ public class Bullet : MonoBehaviour
     private void Update()
     {
         if (playerPos == null)
-            Destroy(gameObject);
+        {
+            DestroyImmediate(gameObject);
+            return;
+        }
         
         transform.position += (direction * (Time.deltaTime * speed));
 
