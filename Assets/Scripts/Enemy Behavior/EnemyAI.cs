@@ -10,60 +10,70 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private GameObject[] wayPoints = null;
     [SerializeField] private float speed = 5;
     [SerializeField] private GameObject focalPoint = null;
-    [SerializeField] private Rigidbody2D enemyRB = null;
+    [SerializeField] private Transform initialTransform;
 
     private GameObject playerInView = null;
+    [SerializeField] Vector3 oldPosition;
+    [SerializeField] Vector3 newPosition;
     // Start is called before the first frame update
     void Start()
     {
+        oldPosition = initialTransform.position;
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+        StartCoroutine(PositionLag());
     }
 
     // Update is called once per frame
     void Update()
     {
+        newPosition = this.transform.position;
+
+        float velocityY = newPosition.y - Mathf.Abs(oldPosition.y);
+        float velocityX = newPosition.x - oldPosition.x;
         //Debug.Log(enemyRB.velocity.y.ToString());
         Vector3 viewRotation = focalPoint.transform.rotation.eulerAngles;
-        if(enemyRB.velocity.y !=0 && enemyRB.velocity.x != 0)
+        if((velocityY > 0.00001 || velocityY < -0.1) && (velocityX > 0.00001 || velocityX < -0.00001))
         {
-            if (enemyRB.velocity.y > 0 && enemyRB.velocity.x > 0)
+            if (velocityY > 0 && velocityX > 0)
             {
                 // Debug.Log("DoneIThink");
                 //-45 degrees
-                viewRotation.z = -45.0f;
+                viewRotation.z = 45.0f;
                 focalPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -45));
                 
             }
-            else if (enemyRB.velocity.y > 0 && enemyRB.velocity.x < 0)
+            if (velocityY > 0 && velocityX < 0)
             {
                 //Debug.Log("DoneIThink");
 
                 //-135 degrees 
-                viewRotation.z = -135.0f;
-                focalPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -135));
+                viewRotation.z = 45.0f;
+                focalPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 45));
             }
-            else if (enemyRB.velocity.y < 0 && enemyRB.velocity.x > 0)
+            if (velocityY < 0 && velocityX > 0)
             {
                 //Debug.Log("DoneIThink");
 
                 //45 degrees
-                viewRotation.z = 45.0f;
-                focalPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 45));
+                viewRotation.z = 135.0f;
+                focalPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -135));
             }
-            else if(enemyRB.velocity.y < 0 && enemyRB.velocity.x < 0)
+            if(velocityY < 0 && velocityX < 0)
             {
                 //Debug.Log("DoneIThink");
 
                 // 135 degrees
-                viewRotation.z = 135.0f;
+                viewRotation.z = -135.0f;
                 focalPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 135));
             }
+            //oldPosition = newPosition;
             return;
         }
+        #region secondHalf
         else
         {
-            if(enemyRB.velocity.y > 0)
+            /*if(velocityY > 0)
             {
                 //Debug.Log("LessStuff");
 
@@ -71,7 +81,7 @@ public class EnemyAI : MonoBehaviour
                 viewRotation.z = 0.0f;
                 focalPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             }
-            else if(enemyRB.velocity.y < 0)
+            else if(velocityY < 0)
             {
                 //Debug.Log("LessStuff");
 
@@ -79,7 +89,7 @@ public class EnemyAI : MonoBehaviour
                 viewRotation.z = 180.0f;
                 focalPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 180));
             }
-            else if(enemyRB.velocity.x > 0)
+            else if(velocityX > 0)
             {
                 //Debug.Log("LessStuff");
 
@@ -87,16 +97,24 @@ public class EnemyAI : MonoBehaviour
                 viewRotation.z = -90.0f;
                 focalPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -90));
             }
-            else if(enemyRB.velocity.x < 0)
+            else if(velocityX < 0)
             {
                 //Debug.Log("LessStuff");
 
                 //90 degrees
                 viewRotation.z = 90.0f;
                 focalPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
-            }
+            }*/
         }
+        #endregion
+        //oldPosition = newPosition;
+    }
 
+    private IEnumerator PositionLag()
+    {
+        yield return new WaitForSeconds(0.2f);
+        oldPosition = newPosition;
+        StartCoroutine(PositionLag());
     }
 
     public NavMeshAgent GetNavMeshAgent()
