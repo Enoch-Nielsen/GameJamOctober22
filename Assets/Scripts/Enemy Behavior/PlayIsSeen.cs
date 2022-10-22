@@ -5,11 +5,13 @@ using UnityEngine;
 public class PlayIsSeen : MonoBehaviour
 {
     [SerializeField] private EnemyAI parentObject = null;
-    private void OnTriggerEnter(Collider other)
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.CompareTag("player"))
+        Debug.Log("Touch");
+        if(collision.CompareTag("Player"))
         {
-            parentObject.SeesPlayer();
+            parentObject.SeesPlayer(collision.gameObject);
         }
     }
 }
