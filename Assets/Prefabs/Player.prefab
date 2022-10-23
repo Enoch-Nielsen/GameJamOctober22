@@ -734,6 +734,7 @@ MonoBehaviour:
   currentStats: {fileID: 0}
   monster: {fileID: 0}
   imageTimer: {fileID: 8702909230062846329}
+  deathObject: {fileID: 4176403500426396123, guid: fb426cfa4dca1c54f93e56e003a603c5, type: 3}
 --- !u!1 &7872470683842028153
 GameObject:
   m_ObjectHideFlags: 0
