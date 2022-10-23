@@ -39,9 +39,11 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject soulObject;
     [SerializeField] private MonsterStats currentStats;
     [SerializeField] private Monster monster;
-
+    
+    
     [Header("Misc")]
     [SerializeField] private Image imageTimer;
+    [SerializeField] private GameObject deathObject;
 
     private void Start()
     {
@@ -243,10 +245,9 @@ public class Player : MonoBehaviour
 
     private void Die()
     {
+        Instantiate(deathObject, currentPlayer.transform.position, Quaternion.identity);
         KillMonster(currentPlayer, true);
         audioManager.AddSoundToQueue(death, false);
-        
-        Debug.Log("Dead");
     }
 
     private void KillMonster(GameObject monster, bool player)
