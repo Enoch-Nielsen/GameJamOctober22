@@ -102,8 +102,8 @@ MonoBehaviour:
   player: {fileID: 0}
   direction: {x: 0, y: 0, z: 0}
   playerMaxDist: 0.5
-  speed: 2
-  damage: 4
+  speed: 2.75
+  damage: 2
   bulletLifetime: 5
 --- !u!114 &2144237490014336103
 MonoBehaviour:
