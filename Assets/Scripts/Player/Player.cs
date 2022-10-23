@@ -8,6 +8,7 @@ using UnityEngine.AI;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -40,7 +41,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Monster monster;
 
     [Header("Misc")]
-    [SerializeField] private TextMeshProUGUI timerTextTemp;
+    [SerializeField] private Image imageTimer;
 
     private void Start()
     {
@@ -132,7 +133,7 @@ public class Player : MonoBehaviour
         }
         
         // Death Timer Text.
-        timerTextTemp.text = "" + Mathf.RoundToInt(currentDeathTimer);
+        imageTimer.fillAmount = (currentDeathTimer / maxDeathTimer);
         
         // Update Vignette.
         vignetteLerpStandIn = Mathf.Lerp(vignetteLerpStandIn, currentVignette, vignetteLerpTime * Time.deltaTime);
