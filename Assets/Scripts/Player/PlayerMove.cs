@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class PlayerMove : MonoBehaviour
 
         float xIn = Input.GetAxisRaw("Horizontal");
         float yIn = Input.GetAxisRaw("Vertical");
-
+        
         move = new Vector2(xIn, yIn);
 
         monsterAnimator.velocity = move;
