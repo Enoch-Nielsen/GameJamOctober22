@@ -123,7 +123,7 @@ public class Player : MonoBehaviour
         List<float> distances = new List<float>();
         foreach (var monster in viableMonsters)
         {
-            distances.Add(Vector2.Distance(currentPlayer.transform.localPosition, monster.transform.localPosition));
+            distances.Add(Vector2.Distance(currentPlayer.transform.position, monster.transform.position));
         }
 
         int shortIndex = 0;
@@ -186,6 +186,7 @@ public class Player : MonoBehaviour
         {
             if (currentSelectedMonster != null)
             {
+                Debug.Log("Possess");
                 PossessMonster();
             }
         }
