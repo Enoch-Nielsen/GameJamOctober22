@@ -10,7 +10,22 @@ public class MonsterAnimator : MonoBehaviour
 
     private void Update()
     {
-        animator.SetFloat("Horizontal", velocity.x);
-        animator.SetFloat("Vertical", velocity.y);
+        Vector2 vel = animVectorRound();
+        
+        animator.SetFloat("Horizontal", vel.x);
+        animator.SetFloat("Vertical", vel.y);
+    }
+
+    private Vector2 animVectorRound()
+    {
+        if (velocity.x != 0 || velocity.y != 0)
+        {
+            if (Mathf.Abs(velocity.x) >= Mathf.Abs(velocity.y))
+                return new Vector2(velocity.x, 0);
+            else
+                return new Vector2(0, velocity.y);
+        }
+        
+        return new Vector2(velocity.x, velocity.y);
     }
 }
