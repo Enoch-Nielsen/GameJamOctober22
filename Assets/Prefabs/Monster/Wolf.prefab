@@ -138,6 +138,13 @@ MonoBehaviour:
   speed: 3.5
   move: {x: 0, y: 0}
   monsterAnimator: {fileID: 2376701653542476802}
+  walkClip: {fileID: 8300000, guid: 5572cec5501e216408a72e9d5fb50667, type: 3}
+  possessClip: {fileID: 8300000, guid: 86b4ec73776567b428601159c1f542e2, type: 3}
+  audioManager: {fileID: 0}
+  walkVolume: 0.65
+  possessVolume: 0.8
+  walkTimer: 0
+  walkTimerMax: 0
   canMove: 0
 --- !u!50 &5924909737117587071
 Rigidbody2D:

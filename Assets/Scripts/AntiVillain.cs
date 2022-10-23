@@ -49,8 +49,12 @@ public class AntiVillain : MonoBehaviour
         Vector2 randomAcc = new Vector2(rX, rY);
 
         Vector2 direction = ((Vector2)playerTransform.position - ((Vector2)transform.position + randomAcc));
-
-        Bullet b = Instantiate(bullet, transform.position, Quaternion.Euler(Vector3.zero)).GetComponent<Bullet>();
+        
+        Vector2 angleDir = ((Vector2)playerTransform.position - (Vector2)transform.position).normalized;
+        var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; 
+        var offset = -90f;
+        
+        Bullet b = Instantiate(bullet, transform.position, Quaternion.Euler(Vector3.forward * (angle + offset))).GetComponent<Bullet>();
 
         if (b != null)
         {
