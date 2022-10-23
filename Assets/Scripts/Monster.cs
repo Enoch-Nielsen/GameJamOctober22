@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
-    public enum MonsterType {Cyclops, Spider, Wraith, Wolf};
+    public enum MonsterType {Cyclops, Spider, Wraith, Wolf, Tree, Grave};
     public MonsterType monsterType;
     public GameObject stats;
 
