@@ -920,6 +920,7 @@ MonoBehaviour:
   speed: 5
   focalPoint: {fileID: 1221258996}
   initialTransform: {fileID: 1003582866}
+  monsterAnimator: {fileID: 0}
   oldPosition: {x: 0, y: 0}
   newPosition: {x: 0, y: 0}
 --- !u!95 &1003582864
@@ -1409,6 +1410,7 @@ MonoBehaviour:
   speed: 5
   focalPoint: {fileID: 0}
   initialTransform: {fileID: 0}
+  monsterAnimator: {fileID: 0}
   oldPosition: {x: 0, y: 0}
   newPosition: {x: 0, y: 0}
 --- !u!65 &1483573877
