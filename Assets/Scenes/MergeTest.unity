@@ -2122,7 +2122,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioObject: {fileID: 8500868513193785016, guid: 2db772ffd14abdc4180a102d8ce67207, type: 3}
-  soundQueue: []
   soundsPlaying: []
   volume: 1
 --- !u!4 &1644676023
