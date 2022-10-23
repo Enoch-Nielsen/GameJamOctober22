@@ -30,6 +30,8 @@ public class FSMPatrol : BaseFSM
         {
             return;
         }
+
+        //work or something
         
         if (agent.remainingDistance > 0.5)
         {
