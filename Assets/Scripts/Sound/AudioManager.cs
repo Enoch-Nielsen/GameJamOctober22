@@ -8,7 +8,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private GameObject audioObject;
     public List<AudioClipper> soundQueue = new List<AudioClipper>();
     public List<AudioPlayer> soundsPlaying;
-    public float volume;
+    public float volume = 0.5f;
 
     private void Update()
     {
@@ -19,7 +19,7 @@ public class AudioManager : MonoBehaviour
         {
             AudioPlayer source = Instantiate(audioObject).GetComponent<AudioPlayer>();
             source.audioSource.clip = clip.clip;
-            source.audioSource.volume = volume;
+            source.audioSource.volume = clip.volume;
             source.soundsPlaying = soundsPlaying;
             source.loop = clip.loop;
             
@@ -44,8 +44,20 @@ public class AudioManager : MonoBehaviour
         return new AudioSource();
     }
 
-    public void AddSoundToQueue(AudioClip clip, bool loop)
+    public void AddSoundToQueue(AudioClip clip, bool loop, float volume)
     {
-        soundQueue.Add(new AudioClipper(clip, loop));
+        soundQueue.Add(new AudioClipper(clip, loop, volume));
+    }
+
+    public void StopAllSounds()
+    {
+        if (soundsPlaying == null)
+            return;
+        
+        foreach (var sound in soundsPlaying.ToArray())
+        {
+            sound.audioSource.Stop();
+            DestroyImmediate(sound.gameObject);
+        }
     }
 }
