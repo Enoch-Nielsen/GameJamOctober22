@@ -1534,6 +1534,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5387845161603741645, guid: 8aa6a245a151f2442a3906b01afcd82e, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5387845162003950009, guid: 8aa6a245a151f2442a3906b01afcd82e, type: 3}
       propertyPath: m_RootOrder
       value: 6
