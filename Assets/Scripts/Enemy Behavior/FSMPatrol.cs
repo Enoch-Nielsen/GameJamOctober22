@@ -21,10 +21,10 @@ public class FSMPatrol : BaseFSM
     // OnStateUpdate is called before OnStateUpdate is called on any state inside this state machine
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        /*if (agent.enabled == false)
+        if (badGuyAI.enabled == false)
         {
             return;
-        }*/
+        }
         
         if (agent.remainingDistance > 0.5)
         {
