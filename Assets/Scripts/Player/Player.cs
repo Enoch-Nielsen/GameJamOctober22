@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
 {
     [Header("Audio")]
     [SerializeField] private AudioManager audioManager;
-    [SerializeField] private AudioClip death, possess, music1, music2, wind;
+    [SerializeField] private AudioClip death, possess, music1, music2, wind, winAudio;
     [SerializeField] private float musicVolume, possessVolume, windVolume;
     [SerializeField] private float musicTimer, musicTimerMax;
 
@@ -46,6 +46,7 @@ public class Player : MonoBehaviour
     [Header("Misc")]
     [SerializeField] private Image imageTimer;
     [SerializeField] private GameObject deathObject;
+    [SerializeField] private Image winImage;
 
     private void Start()
     {
@@ -261,9 +262,16 @@ public class Player : MonoBehaviour
             currentSelectedMonster = null;
 
             currentDeathTimer = maxDeathTimer;
-            
+
             // Play Audio.
             audioManager.AddSoundToQueue(possess, false, possessVolume);
+            
+            if (currentPlayer.GetComponent<Monster>().monsterType == Monster.MonsterType.Tree)
+            {
+                Invoke(nameof(JumpScare), 2.0f);
+                audioManager.StopAllSounds();
+                audioManager.AddSoundToQueue(winAudio, false, possessVolume);
+            }
         }
     }
 
@@ -325,5 +333,10 @@ public class Player : MonoBehaviour
     public void Reset()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void JumpScare()
+    {
+        winImage.gameObject.SetActive(true);
     }
 }
