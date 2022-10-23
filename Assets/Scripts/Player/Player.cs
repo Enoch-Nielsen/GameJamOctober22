@@ -247,7 +247,7 @@ public class Player : MonoBehaviour
             _lightChangeTimer += Time.deltaTime;
         else
         {
-            _currentLightIntensity = Random.Range(3f, 5f);
+            _currentLightIntensity = Random.Range(10f, 20f);
         }
 
         lightParent.transform.position = currentPlayer.transform.position;

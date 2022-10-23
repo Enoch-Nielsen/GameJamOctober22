@@ -17,10 +17,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (!canMove)
             return;
-        
-        if (!canMove)
-            return;        
-        
+
         float xIn = Input.GetAxisRaw("Horizontal");
         float yIn = Input.GetAxisRaw("Vertical");
 

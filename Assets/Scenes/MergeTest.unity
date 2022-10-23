@@ -460,7 +460,7 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.615
-  m_Color: {r: 0.17804518, g: 0.4245283, b: 0.006007465, a: 1}
+  m_Color: {r: 0, g: 0.4433962, b: 0.17600761, a: 1}
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
@@ -2054,7 +2054,7 @@ MonoBehaviour:
   lightParent: {fileID: 587080406}
   light2D: {fileID: 306187836}
   lightMaxTimer: 1
-  lightLerpSpeed: 1
+  lightLerpSpeed: 2
   postProcessing: {fileID: 2102876549}
   currentVignette: 0
   vignetteLerpStandIn: 0
