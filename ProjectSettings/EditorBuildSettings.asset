@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 52b93e33264fa724a8136fa6c78fb54c
   - enabled: 1
-    path: Assets/Scenes/MergeTest.unity
-    guid: 3a3f5b2a36d706949ae9f8920c040951
+    path: Assets/Scenes/MapTester.unity
+    guid: 1d96a9810cd85984e91275ec2f6ef2c6
   m_configObjects: {}
