@@ -200,8 +200,8 @@ public class Player : MonoBehaviour
 
     private void PossessMonster()
     {
-        if (Vector2.Distance(currentPlayer.transform.localPosition,
-                currentSelectedMonster.transform.localPosition) <= maxDistance)
+        if (Vector2.Distance(currentPlayer.transform.position,
+                currentSelectedMonster.transform.position) <= maxDistance)
         {
             Instantiate(deathObject, currentPlayer.transform.position, Quaternion.identity);
 
