@@ -47,8 +47,20 @@ public class Player : MonoBehaviour
         monsterParent = GameObject.FindWithTag("MonsterParent");
         currentPlayer.GetComponent<PlayerMove>().enabled = true;
         currentPlayer.GetComponent<PlayerMove>().canMove = true;
-        currentPlayer.GetComponent<EnemyAI>().enabled = false;
-        currentPlayer.GetComponent<NavMeshAgent>().enabled = false;
+
+        currentPlayer.TryGetComponent<EnemyAI>(out var ai);
+        
+        if (ai != null)
+        {
+            ai.enabled = false;
+        }
+
+        currentPlayer.TryGetComponent<NavMeshAgent>(out var agent);
+        
+        if (agent != null)
+        {
+            agent.enabled = false;
+        }
         
         currentDeathTimer = maxDeathTimer;
         currentPlayer.tag = "Player";
@@ -172,12 +184,36 @@ public class Player : MonoBehaviour
         {
             currentSelectedMonster.GetComponent<PlayerMove>().enabled = true;
 
-            currentSelectedMonster.GetComponent<EnemyAI>().enabled = false;
-            currentSelectedMonster.GetComponent<NavMeshAgent>().enabled = false;
+            currentSelectedMonster.TryGetComponent<EnemyAI>(out var ai);
+        
+            if (ai != null)
+            {
+                ai.enabled = false;
+            }
+
+            currentSelectedMonster.TryGetComponent<NavMeshAgent>(out var agent);
+        
+            if (agent != null)
+            {
+                agent.enabled = false;
+            }
 
             currentPlayer.GetComponent<PlayerMove>().enabled = false;
-            currentPlayer.GetComponent<EnemyAI>().enabled = false;
-            currentPlayer.GetComponent<NavMeshAgent>().enabled = false;
+            
+            currentPlayer.TryGetComponent<EnemyAI>(out var ai2);
+        
+            if (ai2 != null)
+            {
+                ai2.enabled = false;
+            }
+
+            currentPlayer.TryGetComponent<NavMeshAgent>(out var agent2);
+        
+            if (agent2 != null)
+            {
+                agent2.enabled = false;
+            }
+            
             currentPlayer.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             currentPlayer.transform.tag = "Monster";
             
