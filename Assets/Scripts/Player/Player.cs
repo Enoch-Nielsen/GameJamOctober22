@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 using UnityEngine.UI;
 
@@ -14,7 +15,9 @@ public class Player : MonoBehaviour
 {
     [Header("Audio")]
     [SerializeField] private AudioManager audioManager;
-    [SerializeField] private AudioClip death, possess;
+    [SerializeField] private AudioClip death, possess, music1, music2, wind;
+    [SerializeField] private float musicVolume, possessVolume, windVolume;
+    [SerializeField] private float musicTimer, musicTimerMax;
 
     [Header("Light")]
     [SerializeField] private Transform lightParent;
@@ -40,13 +43,17 @@ public class Player : MonoBehaviour
     [SerializeField] private MonsterStats currentStats;
     [SerializeField] private Monster monster;
     
-    
     [Header("Misc")]
     [SerializeField] private Image imageTimer;
     [SerializeField] private GameObject deathObject;
 
     private void Start()
     {
+        audioManager.AddSoundToQueue(music1, false, musicVolume);
+        audioManager.AddSoundToQueue(wind, true, windVolume);
+
+        musicTimerMax = music1.length;
+        
         monsterParent = GameObject.FindWithTag("MonsterParent");
         currentPlayer.GetComponent<PlayerMove>().enabled = true;
         currentPlayer.GetComponent<PlayerMove>().canMove = true;
@@ -80,6 +87,15 @@ public class Player : MonoBehaviour
     {
         if (currentPlayer == null)
             return;
+
+        if (musicTimer <= musicTimerMax + 5.0f)
+        {
+            musicTimer += Time.deltaTime;
+        }
+        else
+        {
+            audioManager.AddSoundToQueue(music2, true, musicVolume);
+        }
 
         // Fill monster list.
         foreach (Transform monster in monsterParent.transform)
@@ -185,7 +201,15 @@ public class Player : MonoBehaviour
         if (Vector2.Distance(currentPlayer.transform.localPosition,
                 currentSelectedMonster.transform.localPosition) <= maxDistance)
         {
+            Instantiate(deathObject, currentPlayer.transform.position, Quaternion.identity);
+
+            if (currentPlayer.GetComponent<Monster>().monsterType == Monster.MonsterType.Wraith)
+            {
+                Destroy(audioManager.GetSound(currentPlayer.GetComponent<PlayerMove>().walkClip).gameObject);
+            }
+
             currentSelectedMonster.GetComponent<PlayerMove>().enabled = true;
+            currentSelectedMonster.GetComponent<PlayerMove>().audioManager = audioManager;
 
             currentSelectedMonster.TryGetComponent<EnemyAI>(out var ai);
         
@@ -239,7 +263,7 @@ public class Player : MonoBehaviour
             currentDeathTimer = maxDeathTimer;
             
             // Play Audio.
-            audioManager.AddSoundToQueue(possess, false);
+            audioManager.AddSoundToQueue(possess, false, possessVolume);
         }
     }
 
@@ -247,7 +271,8 @@ public class Player : MonoBehaviour
     {
         Instantiate(deathObject, currentPlayer.transform.position, Quaternion.identity);
         KillMonster(currentPlayer, true);
-        audioManager.AddSoundToQueue(death, false);
+        audioManager.AddSoundToQueue(death, false, 1.0f);
+        Invoke(nameof(Reset), 5);
     }
 
     private void KillMonster(GameObject monster, bool player)
@@ -295,5 +320,10 @@ public class Player : MonoBehaviour
         currentDeathTimer -= damage;
         currentDeathTimer = Mathf.Clamp(currentDeathTimer, 0, maxDeathTimer);
         Debug.Log("OW : " + damage);
+    }
+
+    public void Reset()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

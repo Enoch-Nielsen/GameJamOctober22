@@ -714,6 +714,14 @@ MonoBehaviour:
   audioManager: {fileID: 5387845161101026419}
   death: {fileID: 8300000, guid: 962ef88fd50cd2b4abcf62c87ee382a4, type: 3}
   possess: {fileID: 8300000, guid: 463174a0db7c28a4d84567a7485099ae, type: 3}
+  music1: {fileID: 8300000, guid: 0040f08768ffd8d46adecbe7b277ce1d, type: 3}
+  music2: {fileID: 8300000, guid: 8f4a07aeaf3bd6846a34966871a38082, type: 3}
+  wind: {fileID: 8300000, guid: 3fe5b03a28bf887449a61f2239e55c77, type: 3}
+  musicVolume: 0.05
+  possessVolume: 0.65
+  windVolume: 0.25
+  musicTimer: 0
+  musicTimerMax: 0
   lightParent: {fileID: 5387845160036074771}
   light2D: {fileID: 5387845160836803065}
   lightMaxTimer: 1
