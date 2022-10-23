@@ -8,11 +8,15 @@ public class AudioPlayer : MonoBehaviour
 {
     public AudioSource audioSource;
     public List<AudioPlayer> soundsPlaying;
+    public bool loop;
     
     void Start()
     {
+        audioSource.loop = loop;
         audioSource.Play();
-        Destroy(gameObject, audioSource.clip.length + 1.0f);
+        
+        if(!loop)
+            Destroy(gameObject, audioSource.clip.length + 1.0f);
     }
 
     private void OnDestroy()

@@ -6,18 +6,22 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     [SerializeField] private GameObject audioObject;
-    public List<AudioClip> soundQueue;
+    public List<AudioClipper> soundQueue = new List<AudioClipper>();
     public List<AudioPlayer> soundsPlaying;
     public float volume;
 
     private void Update()
     {
+        if (soundQueue == null)
+            return;
+        
         foreach (var clip in soundQueue.ToArray())
         {
             AudioPlayer source = Instantiate(audioObject).GetComponent<AudioPlayer>();
-            source.audioSource.clip = clip;
+            source.audioSource.clip = clip.clip;
             source.audioSource.volume = volume;
             source.soundsPlaying = soundsPlaying;
+            source.loop = clip.loop;
             
             soundsPlaying.Add(source);
             soundQueue.Remove(clip);
@@ -37,8 +41,8 @@ public class AudioManager : MonoBehaviour
         return new AudioSource();
     }
 
-    public void AddSoundToQueue(AudioClip clip)
+    public void AddSoundToQueue(AudioClip clip, bool loop)
     {
-        soundQueue.Add(clip);
+        soundQueue.Add(new AudioClipper(clip, loop));
     }
 }

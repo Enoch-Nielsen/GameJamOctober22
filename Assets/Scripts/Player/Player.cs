@@ -39,7 +39,6 @@ public class Player : MonoBehaviour
     [SerializeField] private MonsterStats currentStats;
     [SerializeField] private Monster monster;
 
-    
     [Header("Misc")]
     [SerializeField] private TextMeshProUGUI timerTextTemp;
 
@@ -201,14 +200,14 @@ public class Player : MonoBehaviour
             currentDeathTimer = maxDeathTimer;
             
             // Play Audio.
-            audioManager.AddSoundToQueue(possess);
+            audioManager.AddSoundToQueue(possess, false);
         }
     }
 
     private void Die()
     {
         KillMonster(currentPlayer, true);
-        audioManager.AddSoundToQueue(death);
+        audioManager.AddSoundToQueue(death, false);
         
         Debug.Log("Dead");
     }
