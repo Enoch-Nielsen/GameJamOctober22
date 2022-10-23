@@ -43,6 +43,9 @@ public class AudioManager : MonoBehaviour
 
     public void AddSoundToQueue(AudioClip clip, bool loop)
     {
+        if (GetSound(clip).clip == clip)
+            return;
+        
         soundQueue.Add(new AudioClipper(clip, loop));
     }
 }
