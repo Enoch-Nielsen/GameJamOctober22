@@ -136,7 +136,6 @@ public class Player : MonoBehaviour
                 
                 FlickerLight();
             }
-            
         }
         else
         {
