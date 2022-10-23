@@ -73,7 +73,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterType: 2
-  stats: {fileID: 441893834394540624, guid: 00dcd1438b570f043bb88302fb11fdad, type: 3}
+  stats: {fileID: 441893834394540624, guid: 6c3140866605fed4eacd55d111d8d10d, type: 3}
 --- !u!114 &5924909737117587043
 MonoBehaviour:
   m_ObjectHideFlags: 0
