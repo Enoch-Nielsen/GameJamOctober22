@@ -36,6 +36,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float maxDeathTimer;
     [SerializeField] private float currentDeathTimer;
     [SerializeField] private GameObject soulObject;
+    [SerializeField] private MonsterStats currentStats;
+    [SerializeField] private Monster monster;
+
     
     [Header("Misc")]
     [SerializeField] private TextMeshProUGUI timerTextTemp;
@@ -125,7 +128,7 @@ public class Player : MonoBehaviour
         _vignette.intensity.value = vignetteLerpStandIn;
         
         // Update Light.
-        if (currentPlayer.GetComponent<MonsterStats>().isTracker)
+        if (currentStats.isTracker)
         {
             if (currentSelectedMonster != null)
             {
@@ -169,6 +172,7 @@ public class Player : MonoBehaviour
                 currentSelectedMonster.transform.localPosition) <= maxDistance)
         {
             currentSelectedMonster.GetComponent<PlayerMove>().enabled = true;
+
             currentSelectedMonster.GetComponent<EnemyAI>().enabled = false;
             currentSelectedMonster.GetComponent<NavMeshAgent>().enabled = false;
 
@@ -223,9 +227,14 @@ public class Player : MonoBehaviour
     private void SetStats()
     {
         // Get Stats.
-        maxDeathTimer = currentPlayer.GetComponent<MonsterStats>().monsterDeathTime;
+        monster = currentPlayer.GetComponent<Monster>();
+
+        currentStats = monster.GetStats();
+
+        maxDeathTimer = currentStats.monsterDeathTime;
         currentDeathTimer = maxDeathTimer;
-        currentVignette = currentPlayer.GetComponent<MonsterStats>().nightVision;
+        currentVignette = currentStats.nightVision;
+        currentPlayer.GetComponent<PlayerMove>().speed = currentStats.speed;
     }
 
     private void FlickerLight()
@@ -238,7 +247,7 @@ public class Player : MonoBehaviour
             _lightChangeTimer += Time.deltaTime;
         else
         {
-            _currentLightIntensity = Random.Range(0.5f, 1.1f);
+            _currentLightIntensity = Random.Range(3f, 5f);
         }
 
         lightParent.transform.position = currentPlayer.transform.position;

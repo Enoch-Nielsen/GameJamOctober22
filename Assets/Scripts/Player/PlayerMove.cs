@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private float speed;
+    public float speed;
     [SerializeField] private Vector2 move;
     [SerializeField] private MonsterAnimator monsterAnimator;
 
